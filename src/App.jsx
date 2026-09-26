@@ -10,10 +10,11 @@ import ResourcesDrawer from './components/ResourcesDrawer';
 import ContactModal from './components/ContactModal';
 import WishlistDrawer from './components/WishlistDrawer';
 import Footer from './components/Footer';
+import { TRIPS } from './data/tripsData';
 
 export default function App() {
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('All');
-  const [wishlist, setWishlist] = useState(['uluwatu-bali']);
+  const [wishlist, setWishlist] = useState(['vattavada-kerala', 'munnar-kerala']);
   
   // Modals state
   const [detailTrip, setDetailTrip] = useState(null);
@@ -22,6 +23,15 @@ export default function App() {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+
+  const handleSelectTrip = (tripIdOrObj) => {
+    if (typeof tripIdOrObj === 'string') {
+      const found = TRIPS.find((t) => t.id === tripIdOrObj);
+      if (found) setDetailTrip(found);
+    } else {
+      setDetailTrip(tripIdOrObj);
+    }
+  };
 
   // Toast notification state
   const [toastMessage, setToastMessage] = useState(null);
@@ -43,10 +53,6 @@ export default function App() {
 
   const handleRemoveWishlist = (tripId) => {
     setWishlist(wishlist.filter((id) => id !== tripId));
-  };
-
-  const handleHeroFilterSubmit = ({ activity, location, duration, budget }) => {
-    showToast(`Searching trips in ${location || 'all regions'} under $${budget}...`);
   };
 
   return (
@@ -74,7 +80,7 @@ export default function App() {
       {/* Main Content Sections */}
       <main className="flex-1">
         {/* 2. Hero Section */}
-        <Hero onFilterSubmit={handleHeroFilterSubmit} />
+        <Hero onSelectTrip={handleSelectTrip} />
 
         {/* 3. Social Proof & Brand Statement Section + Asymmetric Value Gallery */}
         <SocialProofAndValue

@@ -1,5 +1,188 @@
 export const TRIPS = [
   {
+    id: 'vattavada-kerala',
+    title: 'Vattavada Organic Valley Retreat',
+    location: 'Vattavada, Idukki, Kerala, India',
+    region: 'Kerala',
+    category: 'Travel Package',
+    activity: 'Trekking',
+    price: 340,
+    slotsLeft: 6,
+    type: 'Open Trip',
+    dateRange: '15-18 September',
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80',
+      '/hero/bg-6.jpg'
+    ],
+    rating: 4.98,
+    reviewsCount: 86,
+    inclusions: [
+      { icon: 'Bed', text: 'Eco Farmstay Cottage' },
+      { icon: 'Car', text: '4x4 Offroad Transfers' },
+      { icon: 'Utensils', text: 'Fresh Farm Organic Meals' },
+      { icon: 'Compass', text: 'Native Spice & Forest Guide' }
+    ],
+    description: 'Tucked beyond Munnar lies Vattavada — Kerala’s organic vegetable village. Experience misty terraced farms, fragrant eucalyptus forest walks, strawberry picking, and tranquility far off the beaten track.',
+    itinerary: [
+      { day: 'Day 1', title: 'Arrival & Eucalyptus Forest Trail', desc: 'Transfer from Munnar to Vattavada valley, welcome herbal tea, sunset ridge walk.' },
+      { day: 'Day 2', title: 'Organic Farm Harvest & Strawberry Trails', desc: 'Morning walk through garlic and strawberry terraces, traditional Kerala farm lunch.' },
+      { day: 'Day 3', title: 'Kurinjimala Sanctuary Trek', desc: 'Hike through shola forests and mountain streams, campfire stargazing.' }
+    ]
+  },
+  {
+    id: 'munnar-kerala',
+    title: 'Munnar Misty Tea Plantation Haven',
+    location: 'Munnar, Western Ghats, Kerala, India',
+    region: 'Kerala',
+    category: 'Staycation',
+    activity: 'Nature',
+    price: 450,
+    slotsLeft: 4,
+    type: 'Private',
+    dateRange: '20-23 September',
+    image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80',
+      '/hero/bg-2.jpg'
+    ],
+    rating: 4.96,
+    reviewsCount: 142,
+    inclusions: [
+      { icon: 'Bed', text: 'Heritage Tea Estate Bungalow' },
+      { icon: 'Car', text: 'Private Scenic Chauffeur' },
+      { icon: 'Utensils', text: 'Gourmet Malabar Meals' },
+      { icon: 'Sun', text: 'Sunrise Plantation Walk' }
+    ],
+    description: 'Escape into Munnar’s emerald tea carpeted hills. Stay in a restored colonial tea planter bungalow, savor artisanal tea tastings, and witness mist rolling over Anamudi Peak.',
+    itinerary: [
+      { day: 'Day 1', title: 'Check-in & High Tea Ceremony', desc: 'Arrival at tea estate, guided high tea tasting overlooking rolling hills.' },
+      { day: 'Day 2', title: 'Lockhart Gap & Tea Factory Secrets', desc: 'Early morning sunrise view point, tour of vintage tea processing museum.' },
+      { day: 'Day 3', title: 'Mattupetty Lake & Echo Point Walk', desc: 'Boating on tranquil lake, picnic amidst pine trees.' }
+    ]
+  },
+  {
+    id: 'kasol-himachal',
+    title: 'Kasol & Parvati River Wilderness Expedition',
+    location: 'Kasol, Kullu, Himachal Pradesh, India',
+    region: 'Himachal',
+    category: 'Travel Package',
+    activity: 'Trekking',
+    price: 290,
+    slotsLeft: 5,
+    type: 'Open Trip',
+    dateRange: '01-05 October',
+    image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=1200&q=80',
+      '/hero/bg-1.jpg'
+    ],
+    rating: 4.94,
+    reviewsCount: 198,
+    inclusions: [
+      { icon: 'Bed', text: 'Riverside Pine Alpine Camp' },
+      { icon: 'Car', text: 'Volvo / SUV Transfers' },
+      { icon: 'Utensils', text: 'All Meals & Israeli Cafe Tour' },
+      { icon: 'Compass', text: 'Himalayan Trekking Guide' }
+    ],
+    description: 'Immerse yourself in Kasol — the heart of Parvati Valley. Trek past roaring glacial streams, towering pine trees, Tosh village wooden homes, and hot sulfur springs of Kheerganga.',
+    itinerary: [
+      { day: 'Day 1', title: 'Arrival in Kasol & Parvati Riverside Stroll', desc: 'Check in to riverside camp, cafe hop in Kasol village.' },
+      { day: 'Day 2', title: 'Tosh Village & Waterfall Hike', desc: 'Scenic trek to Tosh, wooden traditional houses and snow mountain views.' },
+      { day: 'Day 3-4', title: 'Kheerganga Hot Springs Trek', desc: 'Ascend through pine forest trails, soak in natural mountain hot springs summit pool.' }
+    ]
+  },
+  {
+    id: 'spiti-himachal',
+    title: 'Spiti Valley High Altitude Expedition',
+    location: 'Spiti Valley, Himachal Pradesh, India',
+    region: 'Himachal',
+    category: 'Travel Package',
+    activity: 'Trekking',
+    price: 680,
+    slotsLeft: 3,
+    type: 'Open Trip',
+    dateRange: '10-17 October',
+    image: 'https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80'
+    ],
+    rating: 4.99,
+    reviewsCount: 112,
+    inclusions: [
+      { icon: 'Bed', text: 'Authentic Tibetan Homestays' },
+      { icon: 'Car', text: '4x4 Expedition Vehicle' },
+      { icon: 'Utensils', text: 'Traditional Spitian Meals' }
+    ],
+    description: 'Cross high mountain passes into Spiti Valley. Visit Key Monastery perched on cliffs, send mail from Hikkim — world high post office, and stargaze at Chandratal Lake.',
+    itinerary: [
+      { day: 'Day 1-2', title: 'Manali to Kaza via Atal Tunnel', desc: 'Cross Rohtang & Kunzum Pass, reach cliffside town of Kaza.' },
+      { day: 'Day 3-5', title: 'Key Monastery, Langza & Hikkim', desc: 'Fossil village walk, giant Buddha statue, post mail from highest post office.' }
+    ]
+  },
+  {
+    id: 'alleppey-kerala',
+    title: 'Alleppey Emerald Backwater Cruise',
+    location: 'Alappuzha, Kerala, India',
+    region: 'Kerala',
+    category: 'Staycation',
+    activity: 'Nature',
+    price: 390,
+    slotsLeft: 4,
+    type: 'Private',
+    dateRange: '25-27 October',
+    image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80'
+    ],
+    rating: 4.93,
+    reviewsCount: 175,
+    inclusions: [
+      { icon: 'Bed', text: 'Private Luxury Houseboat' },
+      { icon: 'Car', text: 'Cochin Airport Transfer' },
+      { icon: 'Utensils', text: 'Fresh Karimeen Seafood Meals' }
+    ],
+    description: 'Drift along serene palm-fringed canal networks in Alleppey aboard a traditional wooden Kettuvallam houseboat with private chef.',
+    itinerary: [
+      { day: 'Day 1', title: 'Board Houseboat & Canal Cruise', desc: 'Welcome tender coconut drink, glide past paddy fields and village banks.' },
+      { day: 'Day 2', title: 'Canoe Village Safari & Sunset Lagoon', desc: 'Small wooden canoe safari through narrow lily-covered waterways.' }
+    ]
+  },
+  {
+    id: 'ladakh-pangong',
+    title: 'Ladakh & Pangong Tso Sky Lake Safari',
+    location: 'Leh Ladakh, India',
+    region: 'Ladakh',
+    category: 'Travel Package',
+    activity: 'Trekking',
+    price: 790,
+    slotsLeft: 2,
+    type: 'Open Trip',
+    dateRange: '02-09 November',
+    image: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
+    images: [
+      'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80',
+      '/hero/bg-5.jpg'
+    ],
+    rating: 4.97,
+    reviewsCount: 164,
+    inclusions: [
+      { icon: 'Bed', text: 'Pangong Glamping Domes' },
+      { icon: 'Car', text: 'Custom 4x4 Offroader' },
+      { icon: 'Utensils', text: 'Full Board Meals' }
+    ],
+    description: 'Behold the shifting turquoise shades of Pangong Tso lake at 14,000 ft. Ride Bactrian camels in Nubra Valley dunes and cross Khardung La pass.',
+    itinerary: [
+      { day: 'Day 1-2', title: 'Leh Acclimatization & Shanti Stupa', desc: 'Explore Leh Palace, Magnetic Hill, and Monasteries.' },
+      { day: 'Day 3-5', title: 'Khardung La Pass to Pangong Tso', desc: 'Camp under milky way stars next to crystal high altitude waters.' }
+    ]
+  },
+  {
     id: 'uluwatu-bali',
     title: 'Uluwatu Clifftop Retreat',
     location: 'Badung Regency, Bali',
