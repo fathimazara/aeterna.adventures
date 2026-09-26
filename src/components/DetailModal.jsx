@@ -50,7 +50,7 @@ export default function DetailModal({ trip, onClose, onBookNow }) {
 
             <div className="text-right sm:text-right">
               <span className="text-xs uppercase text-white/70 block">Price per seat</span>
-              <span className="text-3xl font-extrabold text-[#D4A373]">${trip.price}</span>
+              <span className="text-3xl font-extrabold text-[#D4A373]">₹{trip.price.toLocaleString('en-IN')}</span>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function DetailModal({ trip, onClose, onBookNow }) {
         <div className="p-6 bg-[#F9F8F6] border-t border-[#2B231F]/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <span className="text-xs text-[#6E6660]">Total per person</span>
-            <div className="text-2xl font-extrabold text-[#2B231F]">${trip.price} USD</div>
+            <div className="text-2xl font-extrabold text-[#2B231F]">₹{trip.price.toLocaleString('en-IN')}</div>
           </div>
 
           <button

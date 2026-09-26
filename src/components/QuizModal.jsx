@@ -34,8 +34,8 @@ export default function QuizModal({ onClose, onSelectTrip }) {
       id: 'budget',
       title: '3. What is your ideal investment range per person?',
       options: [
-        { label: 'Cozy Value ($400 - $1,500)', val: 'low' },
-        { label: 'All-Inclusive Boutique Experience ($2,000 - $4,500)', val: 'high' }
+        { label: 'Cozy Budget (₹10,000 - ₹35,000)', val: 'low' },
+        { label: 'All-Inclusive Luxury Experience (₹35,000 - ₹1,50,000)', val: 'high' }
       ]
     }
   ];
@@ -141,7 +141,7 @@ export default function QuizModal({ onClose, onSelectTrip }) {
                   <h4 className="font-heading font-bold text-xl text-[#2B231F] mb-1">{matchedTrip.title}</h4>
                   <p className="text-xs text-[#6E6660] mb-3">{matchedTrip.description}</p>
                   <div className="flex justify-between items-center text-sm font-extrabold text-[#2B231F]">
-                    <span>${matchedTrip.price} USD</span>
+                    <span>₹{matchedTrip.price.toLocaleString('en-IN')} INR</span>
                     <span className="text-xs font-normal text-[#6E6660]">{matchedTrip.dateRange}</span>
                   </div>
                 </div>

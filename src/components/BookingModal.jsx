@@ -87,7 +87,7 @@ export default function BookingModal({ trip, onClose, onBookingSuccess }) {
               </div>
               <div className="flex justify-between">
                 <span className="text-[#6E6660]">Total Reserved:</span>
-                <span className="font-bold text-[#D4A373]">${totalPrice} USD</span>
+                <span className="font-bold text-[#D4A373]">₹{totalPrice.toLocaleString('en-IN')} INR</span>
               </div>
             </div>
 
@@ -131,9 +131,9 @@ export default function BookingModal({ trip, onClose, onBookingSuccess }) {
               <div className="text-right">
                 <span className="text-xs text-[#6E6660] block">Total Amount</span>
                 <span className="text-2xl font-extrabold text-[#D4A373]">
-                  ${totalPrice.toLocaleString()}
+                  ₹{totalPrice.toLocaleString('en-IN')}
                 </span>
-                <span className="text-[11px] text-[#6E6660] block">(${trip.price} x {guests})</span>
+                <span className="text-[11px] text-[#6E6660] block">(₹{trip.price.toLocaleString('en-IN')} x {guests})</span>
               </div>
             </div>
 
@@ -200,7 +200,7 @@ export default function BookingModal({ trip, onClose, onBookingSuccess }) {
                 className="w-full bg-[#1E1E1E] text-white hover:bg-[#D4A373] hover:text-[#1E1E1E] font-bold py-3.5 px-6 rounded-full transition-all shadow-lg flex items-center justify-center gap-2 font-heading"
               >
                 <Sparkles className="w-4 h-4 text-[#D4A373]" />
-                <span>Confirm & Reserve (${totalPrice})</span>
+                <span>Confirm & Reserve (₹{totalPrice.toLocaleString('en-IN')})</span>
               </button>
             </div>
 

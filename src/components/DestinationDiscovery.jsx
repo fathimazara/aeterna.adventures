@@ -24,7 +24,7 @@ export default function DestinationDiscovery({
   setSelectedCategoryFilter
 }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [maxPrice, setMaxPrice] = useState(5000);
+  const [maxPrice, setMaxPrice] = useState(150000);
   const [selectedMonth, setSelectedMonth] = useState('All');
 
   // Filter trips based on state
@@ -134,13 +134,13 @@ export default function DestinationDiscovery({
             <div className="lg:col-span-3">
               <div className="flex justify-between items-center mb-1">
                 <label className="text-xs font-bold uppercase text-[#6E6660]">Price</label>
-                <span className="text-xs font-extrabold text-[#2B231F]">Up to ${maxPrice.toLocaleString()}</span>
+                <span className="text-xs font-extrabold text-[#2B231F]">Up to ₹{maxPrice.toLocaleString('en-IN')}</span>
               </div>
               <input
                 type="range"
-                min="400"
-                max="5000"
-                step="100"
+                min="10000"
+                max="150000"
+                step="5000"
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                 className="w-full accent-[#1E1E1E] cursor-pointer h-1.5 bg-[#2B231F]/10 rounded-lg"
@@ -166,7 +166,7 @@ export default function DestinationDiscovery({
               <button
                 onClick={() => {
                   setSearchTerm('');
-                  setMaxPrice(5000);
+                  setMaxPrice(150000);
                   setSelectedCategoryFilter('All');
                   setSelectedMonth('All');
                 }}
@@ -189,7 +189,7 @@ export default function DestinationDiscovery({
             <button
               onClick={() => {
                 setSearchTerm('');
-                setMaxPrice(5000);
+                setMaxPrice(150000);
                 setSelectedCategoryFilter('All');
                 setSelectedMonth('All');
               }}
@@ -254,7 +254,7 @@ export default function DestinationDiscovery({
                           {trip.title}
                         </h3>
                         <span className="text-lg font-extrabold text-white">
-                          ${trip.price}
+                          ₹{trip.price.toLocaleString('en-IN')}
                         </span>
                       </div>
 

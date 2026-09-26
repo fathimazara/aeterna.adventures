@@ -50,7 +50,7 @@ export default function WishlistDrawer({ isOpen, onClose, wishlist, onRemoveWish
                   <h4 className="font-heading font-bold text-sm text-[#2B231F] truncate group-hover:text-[#D4A373] transition-colors">
                     {trip.title}
                   </h4>
-                  <p className="text-xs text-[#6E6660] font-medium">${trip.price} USD</p>
+                  <p className="text-xs text-[#6E6660] font-medium">₹{trip.price.toLocaleString('en-IN')} INR</p>
                 </div>
 
                 <div className="flex items-center gap-2">
