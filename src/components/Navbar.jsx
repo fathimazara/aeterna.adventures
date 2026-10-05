@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Compass, Search, Heart, Menu, X, Sparkles, BookOpen, Mail } from 'lucide-react';
+import { Compass, Search, Heart, Menu, X, BookOpen, Mail } from 'lucide-react';
 
 export default function Navbar({ 
   onSelectCategory, 
-  onOpenQuiz, 
   onOpenResources, 
   onOpenContact, 
   wishlistCount,
@@ -116,15 +115,6 @@ export default function Navbar({
             Travel Package
           </button>
 
-          {/* Quiz CTA */}
-          <button
-            onClick={onOpenQuiz}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-[#2B231F] hover:bg-[#D4A373]/20 border border-[#D4A373]/40 transition-all"
-          >
-            <Sparkles className="w-4 h-4 text-[#D4A373]" />
-            <span>Quiz</span>
-          </button>
-
           {/* Resources */}
           <button
             onClick={onOpenResources}
@@ -214,16 +204,6 @@ export default function Navbar({
           </div>
 
           <div className="flex flex-col space-y-2 pt-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenQuiz();
-              }}
-              className="flex items-center gap-3 py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-[#F9F8F6]"
-            >
-              <Sparkles className="w-5 h-5 text-[#D4A373]" />
-              <span>Take Travel Matcher Quiz</span>
-            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

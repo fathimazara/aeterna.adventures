@@ -5,7 +5,6 @@ import SocialProofAndValue from './components/SocialProofAndValue';
 import DestinationDiscovery from './components/DestinationDiscovery';
 import DetailModal from './components/DetailModal';
 import BookingModal from './components/BookingModal';
-import QuizModal from './components/QuizModal';
 import ResourcesDrawer from './components/ResourcesDrawer';
 import ContactModal from './components/ContactModal';
 import WishlistDrawer from './components/WishlistDrawer';
@@ -19,7 +18,6 @@ export default function App() {
   // Modals state
   const [detailTrip, setDetailTrip] = useState(null);
   const [bookingTrip, setBookingTrip] = useState(null);
-  const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
@@ -70,7 +68,6 @@ export default function App() {
       <Navbar
         activeCategory={selectedCategoryFilter}
         onSelectCategory={(cat) => setSelectedCategoryFilter(cat)}
-        onOpenQuiz={() => setIsQuizOpen(true)}
         onOpenResources={() => setIsResourcesOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
         wishlistCount={wishlist.length}
@@ -103,7 +100,6 @@ export default function App() {
       {/* 5. Footer */}
       <Footer
         onSelectCategory={(cat) => setSelectedCategoryFilter(cat)}
-        onOpenQuiz={() => setIsQuizOpen(true)}
         onOpenResources={() => setIsResourcesOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
       />
@@ -127,12 +123,6 @@ export default function App() {
         />
       )}
 
-      {isQuizOpen && (
-        <QuizModal
-          onClose={() => setIsQuizOpen(false)}
-          onSelectTrip={(trip) => setDetailTrip(trip)}
-        />
-      )}
 
       <ResourcesDrawer
         isOpen={isResourcesOpen}
