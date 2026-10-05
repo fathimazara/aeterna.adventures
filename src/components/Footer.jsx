@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Compass, ArrowRight, Heart, CheckCircle2 } from 'lucide-react';
 
-export default function Footer({ onSelectCategory, onOpenQuiz, onOpenResources, onOpenContact }) {
+export default function Footer({ onSelectCategory, onOpenResources, onOpenContact }) {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -80,11 +80,6 @@ export default function Footer({ onSelectCategory, onOpenQuiz, onOpenResources, 
               <li>
                 <button onClick={() => scrollToSection('destinations-section')} className="hover:text-white transition-colors">
                   Yurt Expeditions
-                </button>
-              </li>
-              <li>
-                <button onClick={onOpenQuiz} className="hover:text-[#D4A373] transition-colors flex items-center gap-1">
-                  <span>Take Vibe Quiz</span>
                 </button>
               </li>
             </ul>
