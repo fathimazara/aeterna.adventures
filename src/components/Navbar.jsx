@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Compass, Search, Heart, Menu, X, Sparkles, BookOpen, Mail } from 'lucide-react';
 
-export default function Navbar({
-  onSelectCategory,
-  onOpenQuiz,
-  onOpenResources,
-  onOpenContact,
+export default function Navbar({ 
+  onSelectCategory, 
+  onOpenQuiz, 
+  onOpenResources, 
+  onOpenContact, 
   wishlistCount,
   onOpenWishlist,
   activeCategory
@@ -35,15 +35,15 @@ export default function Navbar({
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#F9F8F6]/85 border-b border-[#2B231F]/10 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-
+        
         {/* Top-Left Brand Logo */}
-        <a
-          href="#"
+        <a 
+          href="#" 
           className="flex items-center gap-3 group focus:outline-none"
         >
-          <img
-            src="/logo.jpg"
-            alt="Aeterna Adventures Logo"
+          <img 
+            src="/logo.jpg" 
+            alt="Aeterna Adventures Logo" 
             className="w-11 h-11 rounded-full object-cover border-2 border-[#D4A373]/60 shadow-md group-hover:scale-105 group-hover:border-[#D4A373] transition-all duration-300"
           />
           <span className="font-heading font-bold text-xl sm:text-2xl tracking-tight text-[#2B231F]">
@@ -53,7 +53,7 @@ export default function Navbar({
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-
+          
           {/* Search Bar Input */}
           <div className="relative mr-2">
             {isSearchOpen ? (
@@ -93,10 +93,11 @@ export default function Navbar({
               onSelectCategory('Staycation');
               scrollToSection('destinations-section');
             }}
-            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${activeCategory === 'Staycation'
-              ? 'bg-[#1E1E1E] text-white shadow-md'
-              : 'text-[#2B231F] hover:bg-[#2B231F]/5'
-              }`}
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+              activeCategory === 'Staycation'
+                ? 'bg-[#1E1E1E] text-white shadow-md'
+                : 'text-[#2B231F] hover:bg-[#2B231F]/5'
+            }`}
           >
             Staycation
           </button>
@@ -106,15 +107,23 @@ export default function Navbar({
               onSelectCategory('Travel Package');
               scrollToSection('destinations-section');
             }}
-            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${activeCategory === 'Travel Package'
-              ? 'bg-[#1E1E1E] text-white shadow-md'
-              : 'text-[#2B231F] hover:bg-[#2B231F]/5'
-              }`}
+            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+              activeCategory === 'Travel Package'
+                ? 'bg-[#1E1E1E] text-white shadow-md'
+                : 'text-[#2B231F] hover:bg-[#2B231F]/5'
+            }`}
           >
             Travel Package
           </button>
 
-
+          {/* Quiz CTA */}
+          <button
+            onClick={onOpenQuiz}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-[#2B231F] hover:bg-[#D4A373]/20 border border-[#D4A373]/40 transition-all"
+          >
+            <Sparkles className="w-4 h-4 text-[#D4A373]" />
+            <span>Quiz</span>
+          </button>
 
           {/* Resources */}
           <button
@@ -205,6 +214,16 @@ export default function Navbar({
           </div>
 
           <div className="flex flex-col space-y-2 pt-2">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenQuiz();
+              }}
+              className="flex items-center gap-3 py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-[#F9F8F6]"
+            >
+              <Sparkles className="w-5 h-5 text-[#D4A373]" />
+              <span>Take Travel Matcher Quiz</span>
+            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

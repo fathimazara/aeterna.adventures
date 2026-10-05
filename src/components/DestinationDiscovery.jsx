@@ -15,21 +15,17 @@ import {
   Maximize2
 } from 'lucide-react';
 import { TRIPS } from '../data/tripsData';
-import WhatsAppButton from './WhatsAppButton';
-import WhatsAppBookingModal from './WhatsAppBookingModal';
 
 export default function DestinationDiscovery({ 
   onSelectTrip, 
   wishlist, 
   onToggleWishlist,
   selectedCategoryFilter,
-  setSelectedCategoryFilter,
-  onOpenContact,
+  setSelectedCategoryFilter
 }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [maxPrice, setMaxPrice] = useState(150000);
   const [selectedMonth, setSelectedMonth] = useState('All');
-  const [waTrip, setWaTrip] = useState(null);
 
   // Filter trips based on state
   const filteredTrips = useMemo(() => {
@@ -69,8 +65,7 @@ export default function DestinationDiscovery({
   };
 
   return (
-    <>
-      <section id="destinations-section" className="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#F9F8F6]">
+    <section id="destinations-section" className="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#F9F8F6]">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Tag & Header Header Layout */}
@@ -324,14 +319,5 @@ export default function DestinationDiscovery({
 
       </div>
     </section>
-
-    {/* WhatsApp Booking Modal triggered from card */}
-    {waTrip && (
-      <WhatsAppBookingModal
-        trip={waTrip}
-        onClose={() => setWaTrip(null)}
-        onOpenContact={onOpenContact}
-      />
-    )}
-  </>);
+  );
 }
