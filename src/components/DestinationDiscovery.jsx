@@ -69,7 +69,8 @@ export default function DestinationDiscovery({
   };
 
   return (
-    <section id="destinations-section" className="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#F9F8F6]">
+    <>
+      <section id="destinations-section" className="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#F9F8F6]">
       <div className="max-w-7xl mx-auto">
         
         {/* Section Tag & Header Header Layout */}
