@@ -12,12 +12,16 @@ import {
   Compass, 
   Sparkles,
   ArrowRight,
-  Maximize2
+  Maximize2,
+  Phone
 } from 'lucide-react';
+import WhatsAppButton, { WhatsAppIcon } from './WhatsAppButton';
 import { TRIPS } from '../data/tripsData';
+import { getWhatsAppNumber, formatPhoneNumber } from '../config/whatsappConfig';
 
 export default function DestinationDiscovery({ 
   onSelectTrip, 
+  onBookWhatsApp,
   wishlist, 
   onToggleWishlist,
   selectedCategoryFilter,
@@ -73,7 +77,7 @@ export default function DestinationDiscovery({
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E1E1E]/5 border border-[#2B231F]/10 text-xs font-bold text-[#2B231F] tracking-wide mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D4A373]" />
-              <span>• Popular Destination 2026</span>
+              <span>• Popular Destinations & Stays 2026</span>
             </div>
             
             <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#2B231F] tracking-tight">
@@ -81,9 +85,15 @@ export default function DestinationDiscovery({
             </h2>
           </div>
 
-          <p className="max-w-md text-base text-[#6E6660] font-normal leading-relaxed">
-            We have great options for everyone and cozy spots for your squad to enjoy together! Filter by category, budget or upcoming dates.
-          </p>
+          <div className="max-w-md space-y-2">
+            <p className="text-base text-[#6E6660] font-normal leading-relaxed">
+              Curated boutique staycations, eco-resorts, and travel packages. Book directly with our dedicated property concierges via WhatsApp in just 1 tap.
+            </p>
+            <div className="flex items-center gap-2 text-xs font-bold text-[#25D366]">
+              <WhatsAppIcon className="w-4 h-4" />
+              <span>Instant WhatsApp confirmation on all properties</span>
+            </div>
+          </div>
         </div>
 
 
@@ -160,6 +170,7 @@ export default function DestinationDiscovery({
                   <option value="August">August 2026</option>
                   <option value="September">September 2026</option>
                   <option value="October">October 2026</option>
+                  <option value="November">November 2026</option>
                 </select>
               </div>
 
@@ -172,7 +183,7 @@ export default function DestinationDiscovery({
                 }}
                 className="mt-5 bg-[#1E1E1E] text-white hover:bg-[#D4A373] hover:text-[#1E1E1E] px-4 py-2 rounded-full text-xs font-bold transition-all shadow-md shrink-0"
               >
-                Discover
+                Reset
               </button>
             </div>
 
@@ -202,6 +213,7 @@ export default function DestinationDiscovery({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTrips.map((trip) => {
               const isWishlisted = wishlist.includes(trip.id);
+              const propertyPhone = formatPhoneNumber(getWhatsAppNumber(trip));
 
               return (
                 <div
@@ -217,15 +229,15 @@ export default function DestinationDiscovery({
                     />
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/25" />
 
                     {/* Top Status Tags */}
                     <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold text-[#2B231F] shadow-sm">
+                        <span className="bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold text-[#2B231F] shadow-sm">
                           • {trip.slotsLeft} Slots Left
                         </span>
-                        <span className="bg-[#1E1E1E]/80 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold text-white shadow-sm">
+                        <span className="bg-[#1E1E1E]/85 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold text-white shadow-sm">
                           {trip.type}
                         </span>
                       </div>
@@ -239,9 +251,10 @@ export default function DestinationDiscovery({
                         className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${
                           isWishlisted
                             ? 'bg-[#D4A373] text-white'
-                            : 'bg-white/80 hover:bg-white text-[#2B231F]'
+                            : 'bg-white/85 hover:bg-white text-[#2B231F]'
                         }`}
                         title="Save to Wishlist"
+                        aria-label="Save to Wishlist"
                       >
                         <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-white' : ''}`} />
                       </button>
@@ -250,20 +263,20 @@ export default function DestinationDiscovery({
                     {/* Bottom Image Details Overlay */}
                     <div className="absolute bottom-4 left-4 right-4 text-white">
                       <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-heading font-bold text-xl drop-shadow-sm group-hover:text-[#D4A373] transition-colors">
+                        <h3 className="font-heading font-bold text-xl drop-shadow-sm group-hover:text-[#D4A373] transition-colors line-clamp-1">
                           {trip.title}
                         </h3>
-                        <span className="text-lg font-extrabold text-white">
+                        <span className="text-lg font-extrabold text-white shrink-0 ml-2">
                           ₹{trip.price.toLocaleString('en-IN')}
                         </span>
                       </div>
 
-                      <div className="flex items-center justify-between text-xs text-white/80">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-[#D4A373]" />
-                          <span>{trip.location}</span>
+                      <div className="flex items-center justify-between text-xs text-white/85">
+                        <div className="flex items-center gap-1 truncate max-w-[55%]">
+                          <MapPin className="w-3.5 h-3.5 text-[#D4A373] shrink-0" />
+                          <span className="truncate">{trip.location}</span>
                         </div>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1 shrink-0">
                           <Calendar className="w-3.5 h-3.5 text-[#D4A373]" />
                           <span>{trip.dateRange}</span>
                         </div>
@@ -272,14 +285,14 @@ export default function DestinationDiscovery({
                   </div>
 
                   {/* Card Content & Quick Inclusion Tags */}
-                  <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                      <p className="text-xs text-[#6E6660] line-clamp-2 mb-4 leading-relaxed">
+                      <p className="text-xs text-[#6E6660] line-clamp-2 mb-3 leading-relaxed">
                         {trip.description}
                       </p>
 
                       {/* Inclusion Pills */}
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex flex-wrap gap-1.5 mb-2">
                         {trip.inclusions.slice(0, 3).map((inc, i) => (
                           <div
                             key={i}
@@ -292,22 +305,43 @@ export default function DestinationDiscovery({
                       </div>
                     </div>
 
-                    {/* Action Bar */}
-                    <div className="flex items-center justify-between pt-3 border-t border-[#2B231F]/10">
-                      <button
-                        onClick={() => onSelectTrip(trip)}
-                        className="flex items-center gap-1.5 text-xs font-extrabold text-[#2B231F] hover:text-[#D4A373] transition-colors"
-                      >
-                        <Maximize2 className="w-3.5 h-3.5" />
-                        <span>View Full Itinerary</span>
-                      </button>
+                    {/* Dual Action Buttons: "Book via WhatsApp" + "Details" */}
+                    <div className="pt-3 border-t border-[#2B231F]/10 space-y-2">
+                      
+                      {/* 1. Direct "Book via WhatsApp" Button on Listing Card */}
+                      <WhatsAppButton
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (onBookWhatsApp) {
+                            onBookWhatsApp(trip);
+                          }
+                        }}
+                        label="Book via WhatsApp"
+                        size="sm"
+                        variant="primary"
+                        fullWidth
+                        title={`Book ${trip.title} directly via WhatsApp`}
+                      />
 
-                      <button
-                        onClick={() => onSelectTrip(trip)}
-                        className="w-8 h-8 rounded-full bg-[#1E1E1E] text-white flex items-center justify-center group-hover:bg-[#D4A373] transition-colors"
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
+                      {/* 2. Secondary Link: View Full Itinerary */}
+                      <div className="flex items-center justify-between pt-1">
+                        <button
+                          onClick={() => onSelectTrip(trip)}
+                          className="flex items-center gap-1.5 text-xs font-bold text-[#2B231F] hover:text-[#D4A373] transition-colors"
+                        >
+                          <Maximize2 className="w-3.5 h-3.5" />
+                          <span>View Full Itinerary & Rooms</span>
+                        </button>
+
+                        <button
+                          onClick={() => onSelectTrip(trip)}
+                          className="w-7 h-7 rounded-full bg-[#1E1E1E] text-white flex items-center justify-center group-hover:bg-[#D4A373] group-hover:text-[#1E1E1E] transition-colors"
+                          aria-label="View Itinerary"
+                        >
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
                     </div>
 
                   </div>

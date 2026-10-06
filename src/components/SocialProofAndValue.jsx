@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Compass, Star, ChevronLeft, ChevronRight, ArrowUpRight, ShieldCheck, Users } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowUpRight, Compass, ShieldCheck, Heart, Sparkles, MapPin } from 'lucide-react';
 import { VALUE_GALLERY_CARDS } from '../data/tripsData';
 
 export default function SocialProofAndValue({ onBookSeatClick }) {
@@ -16,56 +16,13 @@ export default function SocialProofAndValue({ onBookSeatClick }) {
   return (
     <section id="our-value-section" className="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#F9F8F6]">
       
-      {/* 1. Centered Trust Badges & Social Proof Bar */}
-      <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-6 sm:gap-12 py-4 px-6 rounded-full bg-white/70 border border-[#2B231F]/10 shadow-sm backdrop-blur-sm mb-20">
-        
-        {/* Melali Partner Badge */}
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-[#D4A373]/20 flex items-center justify-center text-[#D4A373]">
-            <ShieldCheck className="w-4 h-4" />
-          </div>
-          <span className="font-semibold text-sm text-[#2B231F]">We are Melali</span>
+      {/* 1. Core Value Statement Header */}
+      <div className="max-w-4xl mx-auto text-center mb-14 lg:mb-20">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E1E1E]/5 border border-[#2B231F]/10 text-xs font-bold text-[#2B231F] tracking-wide mb-4">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#D4A373]" />
+          <span>• About Aeterna Adventures</span>
         </div>
 
-        <div className="h-4 w-[1px] bg-[#2B231F]/15 hidden sm:block" />
-
-        {/* Rating Badge */}
-        <div className="flex items-center gap-2">
-          <Star className="w-4 h-4 text-[#D4A373] fill-[#D4A373]" />
-          <span className="font-bold text-sm text-[#2B231F]">5K+ People Satisfied</span>
-        </div>
-
-        <div className="h-4 w-[1px] bg-[#2B231F]/15 hidden sm:block" />
-
-        {/* User Avatars Stack */}
-        <div className="flex items-center gap-3">
-          <div className="flex -space-x-2">
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
-              alt="Traveler avatar"
-              className="w-8 h-8 rounded-full border-2 border-white object-cover"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
-              alt="Traveler avatar"
-              className="w-8 h-8 rounded-full border-2 border-white object-cover"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80"
-              alt="Traveler avatar"
-              className="w-8 h-8 rounded-full border-2 border-white object-cover"
-            />
-            <div className="w-8 h-8 rounded-full border-2 border-white bg-[#1E1E1E] text-white font-bold text-xs flex items-center justify-center">
-              +3
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-
-      {/* 2. Core Value Statement Header */}
-      <div className="max-w-4xl mx-auto text-center mb-16 lg:mb-24">
         <h2 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#2B231F] leading-tight">
           Aeterna.adventures means <br className="hidden sm:block" />
           <span className="relative inline-block font-accent italic font-normal text-5xl sm:text-6xl md:text-7xl text-[#2B231F] ml-2">
@@ -76,7 +33,7 @@ export default function SocialProofAndValue({ onBookSeatClick }) {
         </h2>
 
         {/* Accent logo emblem & dotted vector connection below headline */}
-        <div className="flex items-center justify-center gap-3 mt-8">
+        <div className="flex items-center justify-center gap-3 mt-6">
           <div className="w-16 sm:w-24 h-[1px] border-b border-dashed border-[#2B231F]/30" />
           <img 
             src="/logo.jpg" 
@@ -87,31 +44,56 @@ export default function SocialProofAndValue({ onBookSeatClick }) {
         </div>
       </div>
 
-
-      {/* 3. Value Proposition Layout (2-Column Asymmetric) */}
+      {/* 2. Value Proposition & About Us Layout (2-Column Asymmetric) */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
-        {/* Left Column (5 cols) */}
+        {/* Left Column: About Us & Mission Statement (5 cols) */}
         <div className="lg:col-span-5 space-y-6 pr-0 lg:pr-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E1E1E]/5 border border-[#2B231F]/10 text-xs font-bold text-[#2B231F] tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2B231F]" />
-            <span>• 01 Our Value</span>
+            <span>• Our Mission & Promise</span>
           </div>
 
-          <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#2B231F] leading-tight">
-            Not Your Boring Travel Agent
+          <h3 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#2B231F] leading-tight">
+            Curated Journeys Crafted for Unforgettable Memories
           </h3>
 
-          <p className="text-base sm:text-lg text-[#6E6660] font-normal leading-relaxed">
-            We plan chill, curated trips with good vibes and better people. No rigid tour buses or rushed schedules—just authentic boutique stays, off-grid glamping, and memorable local stories.
+          {/* Paragraph 1 */}
+          <p className="text-base text-[#6E6660] font-normal leading-relaxed">
+            At <strong>Aeterna.Adventures</strong>, we believe every journey should be exciting, comfortable, and unforgettable. Our mission is to help travelers discover the best destinations through carefully curated tour packages from kerala, affordable holiday deals, and customized travel experiences.
           </p>
+
+          {/* Paragraph 2 */}
+          <p className="text-base text-[#6E6660] font-normal leading-relaxed">
+            Whether you’re planning a family vacation, weekend getaway, honeymoon trip, or international holiday, our team ensures every detail of your journey is perfectly arranged. With a focus on quality service, reliable travel planning, and competitive pricing, we make travel simple and enjoyable for everyone.
+          </p>
+
+          {/* Key Feature Badges */}
+          <div className="grid grid-cols-2 gap-2.5 pt-1">
+            <div className="p-3 rounded-2xl bg-white border border-[#2B231F]/10 flex items-center gap-2 shadow-2xs">
+              <Sparkles className="w-4 h-4 text-[#D4A373] shrink-0" />
+              <span className="text-xs font-bold text-[#2B231F]">Packages from Kerala</span>
+            </div>
+            <div className="p-3 rounded-2xl bg-white border border-[#2B231F]/10 flex items-center gap-2 shadow-2xs">
+              <Heart className="w-4 h-4 text-[#D4A373] shrink-0" />
+              <span className="text-xs font-bold text-[#2B231F]">Family & Honeymoon</span>
+            </div>
+            <div className="p-3 rounded-2xl bg-white border border-[#2B231F]/10 flex items-center gap-2 shadow-2xs">
+              <Compass className="w-4 h-4 text-[#D4A373] shrink-0" />
+              <span className="text-xs font-bold text-[#2B231F]">Customized Itineraries</span>
+            </div>
+            <div className="p-3 rounded-2xl bg-white border border-[#2B231F]/10 flex items-center gap-2 shadow-2xs">
+              <ShieldCheck className="w-4 h-4 text-[#D4A373] shrink-0" />
+              <span className="text-xs font-bold text-[#2B231F]">Reliable Planning</span>
+            </div>
+          </div>
 
           <div className="pt-2">
             <button
               onClick={onBookSeatClick}
               className="inline-flex items-center gap-3 bg-[#1E1E1E] text-white hover:bg-[#D4A373] hover:text-[#1E1E1E] font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg group font-heading"
             >
-              <span>Book a Seat</span>
+              <span>Explore All Destinations</span>
               <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </button>
           </div>
@@ -146,6 +128,11 @@ export default function SocialProofAndValue({ onBookSeatClick }) {
                     <img
                       src={card.image}
                       alt={card.title}
+                      onError={(e) => {
+                        if (card.fallbackImage && e.target.src !== card.fallbackImage) {
+                          e.target.src = card.fallbackImage;
+                        }
+                      }}
                       className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
                     
@@ -170,6 +157,7 @@ export default function SocialProofAndValue({ onBookSeatClick }) {
                 </div>
               );
             })}
+
 
           </div>
 

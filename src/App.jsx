@@ -5,6 +5,8 @@ import SocialProofAndValue from './components/SocialProofAndValue';
 import DestinationDiscovery from './components/DestinationDiscovery';
 import DetailModal from './components/DetailModal';
 import BookingModal from './components/BookingModal';
+import WhatsAppBookingModal from './components/WhatsAppBookingModal';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 import ResourcesDrawer from './components/ResourcesDrawer';
 import ContactModal from './components/ContactModal';
 import WishlistDrawer from './components/WishlistDrawer';
@@ -18,9 +20,19 @@ export default function App() {
   // Modals state
   const [detailTrip, setDetailTrip] = useState(null);
   const [bookingTrip, setBookingTrip] = useState(null);
+  const [whatsAppTrip, setWhatsAppTrip] = useState(null);
+  const [whatsAppInitialData, setWhatsAppInitialData] = useState({});
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+
+  // Toast notification state
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3500);
+  };
 
   const handleSelectTrip = (tripIdOrObj) => {
     if (typeof tripIdOrObj === 'string') {
@@ -31,12 +43,12 @@ export default function App() {
     }
   };
 
-  // Toast notification state
-  const [toastMessage, setToastMessage] = useState(null);
-
-  const showToast = (msg) => {
-    setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3500);
+  // Open WhatsApp booking modal
+  const handleOpenWhatsAppBooking = (trip, initialData = {}) => {
+    // If no trip is provided (e.g. from general navbar click), pick first trip as default
+    const targetTrip = trip || TRIPS[0];
+    setWhatsAppTrip(targetTrip);
+    setWhatsAppInitialData(initialData);
   };
 
   const handleToggleWishlist = (tripId) => {
@@ -54,12 +66,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9F8F6] text-[#2B231F] font-sans">
+    <div className="min-h-screen flex flex-col bg-[#F9F8F6] text-[#2B231F] font-sans relative">
       
       {/* Toast Notification Popup */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#1E1E1E] text-white px-5 py-3 rounded-full shadow-2xl text-xs sm:text-sm font-bold border border-[#D4A373]/40 flex items-center gap-2 animate-in slide-in-from-bottom duration-300">
-          <span className="w-2 h-2 rounded-full bg-[#D4A373] animate-ping" />
+        <div className="fixed bottom-6 left-6 z-50 bg-[#1E1E1E] text-white px-5 py-3 rounded-full shadow-2xl text-xs sm:text-sm font-bold border border-[#D4A373]/40 flex items-center gap-2 animate-in slide-in-from-bottom duration-300">
+          <span className="w-2 h-2 rounded-full bg-[#25D366] animate-ping" />
           <span>{toastMessage}</span>
         </div>
       )}
@@ -70,6 +82,7 @@ export default function App() {
         onSelectCategory={(cat) => setSelectedCategoryFilter(cat)}
         onOpenResources={() => setIsResourcesOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
+        onOpenWhatsAppBooking={() => handleOpenWhatsAppBooking(null)}
         wishlistCount={wishlist.length}
         onOpenWishlist={() => setIsWishlistOpen(true)}
       />
@@ -94,6 +107,7 @@ export default function App() {
           wishlist={wishlist}
           onToggleWishlist={handleToggleWishlist}
           onSelectTrip={(trip) => setDetailTrip(trip)}
+          onBookWhatsApp={(trip) => handleOpenWhatsAppBooking(trip)}
         />
       </main>
 
@@ -101,6 +115,13 @@ export default function App() {
       <Footer
         onSelectCategory={(cat) => setSelectedCategoryFilter(cat)}
         onOpenResources={() => setIsResourcesOpen(true)}
+        onOpenContact={() => setIsContactOpen(true)}
+        onOpenWhatsAppBooking={() => handleOpenWhatsAppBooking(null)}
+      />
+
+      {/* Floating 1-Tap WhatsApp Concierge Widget */}
+      <FloatingWhatsApp
+        onOpenWhatsAppBooking={(trip) => handleOpenWhatsAppBooking(trip)}
         onOpenContact={() => setIsContactOpen(true)}
       />
 
@@ -110,6 +131,7 @@ export default function App() {
           trip={detailTrip}
           onClose={() => setDetailTrip(null)}
           onBookNow={(tripToBook) => setBookingTrip(tripToBook)}
+          onBookWhatsApp={(tripToBook, options) => handleOpenWhatsAppBooking(tripToBook, options)}
         />
       )}
 
@@ -120,9 +142,25 @@ export default function App() {
           onBookingSuccess={(details) => {
             showToast(`Reservation confirmed for ${details.name}!`);
           }}
+          onSwitchToWhatsApp={(tripToBook, initialData) => {
+            setBookingTrip(null);
+            handleOpenWhatsAppBooking(tripToBook, initialData);
+          }}
         />
       )}
 
+      {/* WhatsApp Booking Modal */}
+      {whatsAppTrip && (
+        <WhatsAppBookingModal
+          trip={whatsAppTrip}
+          initialData={whatsAppInitialData}
+          onClose={() => {
+            setWhatsAppTrip(null);
+            setWhatsAppInitialData({});
+          }}
+          onOpenContact={() => setIsContactOpen(true)}
+        />
+      )}
 
       <ResourcesDrawer
         isOpen={isResourcesOpen}

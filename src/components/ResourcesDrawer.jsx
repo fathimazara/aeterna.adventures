@@ -1,5 +1,7 @@
 import React from 'react';
 import { X, BookOpen, Sun, Compass, ShieldCheck, Download, ExternalLink } from 'lucide-react';
+import WhatsAppButton, { WhatsAppIcon } from './WhatsAppButton';
+import { openWhatsAppConcierge } from '../utils/whatsappUtils';
 
 export default function ResourcesDrawer({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -28,6 +30,13 @@ export default function ResourcesDrawer({ isOpen, onClose }) {
     }
   ];
 
+  const handleConciergeChat = () => {
+    openWhatsAppConcierge({
+      inquiryType: 'Resource & Travel Guide Inquiry',
+      customText: 'Hi! I am reading the travel resources and would like to ask some questions regarding packing and itineraries.',
+    });
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between overflow-hidden">
@@ -41,6 +50,7 @@ export default function ResourcesDrawer({ isOpen, onClose }) {
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-white/10 text-white transition-colors"
+            aria-label="Close drawer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -83,18 +93,16 @@ export default function ResourcesDrawer({ isOpen, onClose }) {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="p-6 bg-[#F9F8F6] border-t border-[#2B231F]/10 text-center">
-          <p className="text-xs text-[#6E6660] mb-2">Need customized trip advice?</p>
-          <a
-            href="https://wa.me/15550000000"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-full bg-[#1E1E1E] text-white hover:bg-[#D4A373] hover:text-[#1E1E1E] text-xs font-bold transition-all shadow-md"
-          >
-            <span>Chat with Trip Concierge</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+        {/* Footer with WhatsApp Concierge */}
+        <div className="p-6 bg-[#F9F8F6] border-t border-[#2B231F]/10 text-center space-y-2">
+          <p className="text-xs text-[#6E6660]">Need customized trip advice or private squad planning?</p>
+          <WhatsAppButton
+            onClick={handleConciergeChat}
+            label="Chat with Trip Concierge on WhatsApp"
+            size="sm"
+            variant="primary"
+            fullWidth
+          />
         </div>
 
       </div>

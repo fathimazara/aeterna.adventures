@@ -371,27 +371,31 @@ export const TRIPS = [
 
 export const VALUE_GALLERY_CARDS = [
   {
-    id: 'bangli',
-    title: 'Highland Pine Ridge',
-    subtitle: 'Misty Alpine Valley Expeditions',
-    image: '/hero/bg-1.jpg',
-    tag: 'Alpine Treks'
+    id: 'munnar-valley',
+    title: 'Munnar Tea Valleys',
+    subtitle: "Kerala's Lush Green Plantations",
+    image: '/about/munnar-panorama.jpg',
+    fallbackImage: '/about/about-munnar.jpg',
+    tag: 'Kerala'
   },
   {
-    id: 'uluwatu',
-    title: 'Glacial River Canyon',
-    subtitle: 'Wild Rivers & Pine Highlands',
-    image: '/hero/bg-2.jpg',
-    tag: 'River Valleys'
+    id: 'manali-snow',
+    title: 'Manali Snow Peaks',
+    subtitle: 'Himachal Pradesh Winter Escapes',
+    image: '/about/manali-snow.jpg',
+    fallbackImage: '/about/about-manali.jpg',
+    tag: 'Himachal'
   },
   {
-    id: 'retreat',
-    title: 'Sacred Cascade Trails',
-    subtitle: 'Wilderness Streams & Glamping',
-    image: '/hero/bg-4.jpg',
-    tag: 'True Outdoor'
+    id: 'kasol-village',
+    title: 'Kasol Parvati Valley',
+    subtitle: 'Himalayan Village Adventures',
+    image: '/about/kasol-village.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=90',
+    tag: 'Himachal'
   }
 ];
+
 
 export const TESTIMONIALS = [
   {

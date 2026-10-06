@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Compass, Search, Heart, Menu, X, BookOpen, Mail } from 'lucide-react';
+import WhatsAppButton, { WhatsAppIcon } from './WhatsAppButton';
+import { openWhatsAppConcierge } from '../utils/whatsappUtils';
+import { WHATSAPP_CONFIG, formatPhoneNumber } from '../config/whatsappConfig';
 
 export default function Navbar({ 
   onSelectCategory, 
   onOpenResources, 
   onOpenContact, 
+  onOpenWhatsAppBooking,
   wishlistCount,
   onOpenWishlist,
   activeCategory
@@ -31,8 +35,15 @@ export default function Navbar({
     }
   };
 
+  const handleQuickWhatsAppChat = () => {
+    openWhatsAppConcierge({
+      inquiryType: 'Quick Navbar Inquiry',
+      customText: 'Hi Aeterna Concierge! I would like to check availability for upcoming trips and resorts.',
+    });
+  };
+
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#F9F8F6]/85 border-b border-[#2B231F]/10 transition-all duration-300">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#F9F8F6]/90 border-b border-[#2B231F]/10 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
         {/* Top-Left Brand Logo */}
@@ -70,6 +81,7 @@ export default function Navbar({
                   type="button"
                   onClick={() => setIsSearchOpen(false)}
                   className="absolute right-2 text-[#6E6660] hover:text-[#2B231F] p-1"
+                  aria-label="Close search"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -130,7 +142,7 @@ export default function Navbar({
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-medium text-[#6E6660] hover:text-[#2B231F] hover:bg-[#2B231F]/5 transition-all"
           >
             <Mail className="w-4 h-4" />
-            <span>Contact Us</span>
+            <span>Contact</span>
           </button>
 
           {/* About Us */}
@@ -143,12 +155,25 @@ export default function Navbar({
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
+          
+          {/* Quick WhatsApp Header CTA */}
+          <div className="hidden md:block">
+            <WhatsAppButton
+              onClick={handleQuickWhatsAppChat}
+              label="WhatsApp Booking"
+              size="sm"
+              variant="primary"
+              title="Chat with Concierge & Book via WhatsApp"
+            />
+          </div>
+
           {/* Wishlist Button */}
           <button
             onClick={onOpenWishlist}
             className="relative p-2.5 rounded-full bg-white border border-[#2B231F]/10 hover:border-[#D4A373] text-[#2B231F] transition-all shadow-sm group"
             title="Saved Wishlist"
+            aria-label="Wishlist"
           >
             <Heart className={`w-5 h-5 ${wishlistCount > 0 ? 'fill-[#D4A373] text-[#D4A373]' : 'text-[#2B231F] group-hover:text-[#D4A373]'}`} />
             {wishlistCount > 0 && (
@@ -162,6 +187,7 @@ export default function Navbar({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2.5 rounded-full bg-[#1E1E1E] text-white hover:bg-black transition-colors"
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -171,6 +197,19 @@ export default function Navbar({
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-[#2B231F]/10 px-6 py-6 space-y-4 shadow-xl animate-in slide-in-from-top duration-300">
+          
+          {/* Mobile WhatsApp Action */}
+          <WhatsAppButton
+            onClick={() => {
+              setMobileMenuOpen(false);
+              handleQuickWhatsAppChat();
+            }}
+            label="Book via WhatsApp (Instant)"
+            size="md"
+            variant="primary"
+            fullWidth
+          />
+
           <div className="relative">
             <input
               type="text"
@@ -222,7 +261,7 @@ export default function Navbar({
               className="flex items-center gap-3 py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-[#F9F8F6]"
             >
               <Mail className="w-5 h-5 text-[#6E6660]" />
-              <span>Contact Us</span>
+              <span>Contact Concierge</span>
             </button>
             <button
               onClick={() => scrollToSection('our-value-section')}
