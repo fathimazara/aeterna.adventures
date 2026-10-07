@@ -112,7 +112,7 @@ export default function TravelHero({ onExploreClick, onBookClick }) {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-xs font-extrabold uppercase tracking-widest mb-6 shadow-xl"
         >
           <Globe className="w-4 h-4 text-[#D4A373]" />
-          <span>Premium Travel Experiences</span>
+          <span>Curated Indian Expeditions 🇮🇳</span>
         </motion.div>
 
         {/* Main Headline */}
@@ -122,9 +122,9 @@ export default function TravelHero({ onExploreClick, onBookClick }) {
           transition={{ duration: 0.9, delay: 0.4 }}
           className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-[100px] font-extrabold text-white tracking-tight leading-none mb-6 drop-shadow-2xl"
         >
-          EXPLORE THE <br className="hidden sm:block" />
+          EXPLORE <br className="hidden sm:block" />
           <span className="font-accent italic font-normal text-6xl sm:text-8xl md:text-9xl text-[#D4A373] drop-shadow-md">
-            World
+            India
           </span>
         </motion.h1>
 
@@ -135,7 +135,7 @@ export default function TravelHero({ onExploreClick, onBookClick }) {
           transition={{ duration: 0.9, delay: 0.6 }}
           className="max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl text-white/90 font-normal leading-relaxed drop-shadow-lg mb-10"
         >
-          Discover unforgettable destinations, experiences and adventures.
+          Discover breathtaking experiences and unforgettable adventures across India.
         </motion.p>
 
         {/* CTA Buttons */}
