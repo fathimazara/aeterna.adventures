@@ -4,38 +4,31 @@ import { ChevronLeft, ChevronRight, MapPin, Sparkles } from 'lucide-react';
 export const HERO_SLIDES = [
   {
     id: 1,
-    title: 'Misty Eco Cottage & Valley Retreat',
-    location: 'Vattavada, Kerala',
-    image: '/hero/custom-bg-1.jpg',
+    title: 'Parvati Valley Himalayan Panorama',
+    location: 'Himachal Pradesh, India',
+    image: '/hero/hd-valley.jpg',
     fallback: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2560&q=95'
   },
   {
     id: 2,
-    title: 'Parvati River & Alpine Pine Forest',
-    location: 'Kasol, Himachal Pradesh',
-    image: '/hero/custom-bg-2.jpg',
+    title: 'Misty Mountain Village & Eco Cottage',
+    location: 'Himachal Pradesh, India',
+    image: '/hero/hd-misty.jpg',
     fallback: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=2560&q=95'
   },
   {
     id: 3,
-    title: 'Emerald Plantation & Mountain Trail',
-    location: 'Munnar & Western Ghats',
-    image: '/hero/custom-bg-3.jpg',
+    title: 'Rocky Mountain Trekking Trail',
+    location: 'Himachal Pradesh, India',
+    image: '/hero/hd-trail.jpg',
     fallback: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2560&q=95'
   },
   {
     id: 4,
-    title: 'Mountain Stream & Wild Cascade Valley',
-    location: 'Wayanad, Kerala',
-    image: '/hero/custom-bg-4.jpg',
+    title: 'Crystal Mountain Stream & Gorge',
+    location: 'Kheerganga, Himachal Pradesh',
+    image: '/hero/hd-stream.jpg',
     fallback: 'https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=2560&q=95'
-  },
-  {
-    id: 5,
-    title: 'Serene Palm Backwaters Sunset',
-    location: 'Alleppey & Kumarakom, Kerala',
-    image: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=2560&q=95',
-    fallback: '/hero/bg-3.jpg'
   }
 ];
 
