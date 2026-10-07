@@ -397,26 +397,52 @@ export const VALUE_GALLERY_CARDS = [
 ];
 
 
-export const TESTIMONIALS = [
+export const TESTIMONIALS = [];
+
+export const WORLD_DESTINATIONS = [
   {
-    name: 'Sophia Chen',
-    location: 'Singapore',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-    comment: 'The Kazakhstan yurt trek exceeded all expectations! The attention to detail and vibe of our group was pure magic.',
-    trip: 'Tian Shan Yurt Expedition'
-  },
-  {
-    name: 'Marcus Vance',
-    location: 'London, UK',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
-    comment: 'Not your typical agency. Aeterna feels like traveling with long-time friends who have all the insider keys.',
-    trip: 'Uluwatu Clifftop Retreat'
-  },
-  {
-    name: 'Elena Rostova',
-    location: 'Sydney, AU',
-    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80',
-    comment: 'The Sumba safari tents under the night sky were unreal. Seamless transport and amazing camp chef feasts!',
-    trip: 'Sumba Wild Coast'
+    id: 'india',
+    name: 'INDIA',
+    country: 'India',
+    flag: '🇮🇳',
+    subtitle: 'Discover the colors, culture and heritage of India.',
+    description: 'From the emerald tea plantations of Kerala to majestic Himalayan peaks, pristine backwaters, and ancient heritage, experience a land of endless wonder.',
+    bgImage: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=2560&q=95',
+    cardImage: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80',
+    startingPrice: '₹14,999',
+    duration: '4 Days / 3 Nights',
+    rating: '4.98',
+    mapCoords: { x: 72, y: 52 },
+    packages: [
+      {
+        id: 'pkg-vattavada',
+        title: 'Vattavada Organic Valley Retreat',
+        location: 'Kerala, India',
+        price: '₹14,999',
+        rating: '4.98',
+        image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80',
+        desc: 'Misty terraced organic farmstay, strawberry picking, and offroad 4x4 Jeep safari.'
+      },
+      {
+        id: 'pkg-munnar',
+        title: 'Munnar Misty Tea Plantation Haven',
+        location: 'Kerala, India',
+        price: '₹18,500',
+        rating: '4.96',
+        image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80',
+        desc: 'Colonial tea bungalow, sunrise high tea tasting, and Anamudi peak mist.'
+      },
+      {
+        id: 'pkg-kasol',
+        title: 'Kasol & Parvati River Expedition',
+        location: 'Himachal Pradesh, India',
+        price: '₹12,800',
+        rating: '4.94',
+        image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80',
+        desc: 'Riverside pine alpine camping, Tosh wooden village, and Kheerganga hot springs.'
+      }
+    ]
   }
 ];
+
+

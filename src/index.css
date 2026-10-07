@@ -10,6 +10,10 @@
     --card-bg: #FFFFFF;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
@@ -87,4 +91,113 @@
 .animate-progress-line {
   animation: progressLine 5s linear infinite;
 }
+
+/* ====== SCROLL REVEAL ANIMATIONS ====== */
+
+/* Fade up reveal */
+@keyframes scrollFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in from left */
+@keyframes scrollFadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade in from right */
+@keyframes scrollFadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale up reveal */
+@keyframes scrollScaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Blur reveal */
+@keyframes scrollBlurReveal {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* Scroll reveal utility classes */
+.scroll-reveal {
+  opacity: 0;
+  animation: scrollFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  animation: scrollFadeLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  animation: scrollFadeRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+.scroll-reveal-scale {
+  opacity: 0;
+  animation: scrollScaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+.scroll-reveal-blur {
+  opacity: 0;
+  animation: scrollBlurReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-timeline: view();
+  animation-range: entry 0% entry 45%;
+}
+
+/* Stagger delays for grid children */
+.scroll-delay-1 { animation-delay: 0.1s; }
+.scroll-delay-2 { animation-delay: 0.2s; }
+.scroll-delay-3 { animation-delay: 0.3s; }
+.scroll-delay-4 { animation-delay: 0.4s; }
+.scroll-delay-5 { animation-delay: 0.5s; }
+.scroll-delay-6 { animation-delay: 0.6s; }
+
 

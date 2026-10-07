@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Compass, Search, Heart, Menu, X, BookOpen, Mail } from 'lucide-react';
-import WhatsAppButton, { WhatsAppIcon } from './WhatsAppButton';
-import { openWhatsAppConcierge } from '../utils/whatsappUtils';
-import { WHATSAPP_CONFIG, formatPhoneNumber } from '../config/whatsappConfig';
+import React, { useState, useEffect } from 'react';
+import { Compass, Search, Heart, Menu, X, BookOpen, Mail, Globe, Calendar } from 'lucide-react';
+import WhatsAppButton from './WhatsAppButton';
 
 export default function Navbar({ 
   onSelectCategory, 
@@ -10,22 +8,18 @@ export default function Navbar({
   onOpenContact, 
   onOpenWhatsAppBooking,
   wishlistCount,
-  onOpenWishlist,
-  activeCategory
+  onOpenWishlist
 }) {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      const destSection = document.getElementById('destinations-section');
-      if (destSection) {
-        destSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 40);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id) => {
     setMobileMenuOpen(false);
@@ -35,18 +29,15 @@ export default function Navbar({
     }
   };
 
-  const handleQuickWhatsAppChat = () => {
-    openWhatsAppConcierge({
-      inquiryType: 'Quick Navbar Inquiry',
-      customText: 'Hi Aeterna Concierge! I would like to check availability for upcoming trips and resorts.',
-    });
-  };
-
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#F9F8F6]/90 border-b border-[#2B231F]/10 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <header className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-500 select-none ${
+      isScrolled 
+        ? 'bg-[#090807]/85 backdrop-blur-md border-b border-white/10 shadow-2xl py-3' 
+        : 'bg-gradient-to-b from-black/80 via-black/30 to-transparent py-5'
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
-        {/* Top-Left Brand Logo */}
+        {/* Brand Logo */}
         <a 
           href="#" 
           className="flex items-center gap-3 group focus:outline-none"
@@ -54,139 +45,73 @@ export default function Navbar({
           <img 
             src="/logo.jpg" 
             alt="Aeterna Adventures Logo" 
-            className="w-11 h-11 rounded-full object-cover border-2 border-[#D4A373]/60 shadow-md group-hover:scale-105 group-hover:border-[#D4A373] transition-all duration-300"
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-[#D4A373] shadow-md group-hover:scale-105 transition-transform duration-300"
           />
-          <span className="font-heading font-bold text-xl sm:text-2xl tracking-tight text-[#2B231F]">
+          <span className="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-white">
             Aeterna<span className="text-[#D4A373]">.adventures</span>
           </span>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-          
-          {/* Search Bar Input */}
-          <div className="relative mr-2">
-            {isSearchOpen ? (
-              <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-                <input
-                  type="text"
-                  placeholder="Search destinations (e.g. Bali, Yurts)..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 pr-8 py-2 w-64 text-sm rounded-full bg-white border border-[#2B231F]/20 text-[#2B231F] focus:outline-none focus:ring-2 focus:ring-[#D4A373] shadow-inner"
-                  autoFocus
-                />
-                <Search className="w-4 h-4 text-[#6E6660] absolute left-3 pointer-events-none" />
-                <button
-                  type="button"
-                  onClick={() => setIsSearchOpen(false)}
-                  className="absolute right-2 text-[#6E6660] hover:text-[#2B231F] p-1"
-                  aria-label="Close search"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </form>
-            ) : (
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#2B231F] hover:bg-black/5 rounded-full transition-colors"
-                title="Search destinations"
-              >
-                <Search className="w-4.5 h-4.5 text-[#2B231F]" />
-                <span className="hidden xl:inline">Search</span>
-              </button>
-            )}
-          </div>
+        {/* Desktop Links with Animated Underline Effect */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          {[
+            { label: 'Home', id: 'hero-section' },
+            { label: 'Destinations', id: 'dest-india' },
+            { label: 'World Map', id: 'world-map-section' },
+            { label: 'Packages', id: 'destinations-section' },
+            { label: 'Reviews', id: 'real-reviews-section' },
+            { label: 'About', id: 'our-value-section' },
+          ].map((item) => (
+            <button
+              key={item.label}
+              onClick={() => scrollToSection(item.id)}
+              className="relative py-1 text-sm font-semibold text-white/90 hover:text-white transition-colors group cursor-pointer"
+            >
+              <span>{item.label}</span>
+              {/* Animated Underline */}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4A373] transition-all duration-300 group-hover:w-full" />
+            </button>
+          ))}
 
-          {/* Category Links */}
-          <button
-            onClick={() => {
-              onSelectCategory('Staycation');
-              scrollToSection('destinations-section');
-            }}
-            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-              activeCategory === 'Staycation'
-                ? 'bg-[#1E1E1E] text-white shadow-md'
-                : 'text-[#2B231F] hover:bg-[#2B231F]/5'
-            }`}
-          >
-            Staycation
-          </button>
-
-          <button
-            onClick={() => {
-              onSelectCategory('Travel Package');
-              scrollToSection('destinations-section');
-            }}
-            className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
-              activeCategory === 'Travel Package'
-                ? 'bg-[#1E1E1E] text-white shadow-md'
-                : 'text-[#2B231F] hover:bg-[#2B231F]/5'
-            }`}
-          >
-            Travel Package
-          </button>
-
-          {/* Resources */}
-          <button
-            onClick={onOpenResources}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium text-[#6E6660] hover:text-[#2B231F] hover:bg-[#2B231F]/5 transition-all"
-          >
-            <BookOpen className="w-4 h-4" />
-            <span>Resources</span>
-          </button>
-
-          {/* Contact Us */}
           <button
             onClick={onOpenContact}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-medium text-[#6E6660] hover:text-[#2B231F] hover:bg-[#2B231F]/5 transition-all"
+            className="relative py-1 text-sm font-semibold text-white/90 hover:text-white transition-colors group cursor-pointer"
           >
-            <Mail className="w-4 h-4" />
             <span>Contact</span>
-          </button>
-
-          {/* About Us */}
-          <button
-            onClick={() => scrollToSection('our-value-section')}
-            className="px-3 py-2 rounded-full text-sm font-medium text-[#6E6660] hover:text-[#2B231F] transition-all"
-          >
-            About Us
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4A373] transition-all duration-300 group-hover:w-full" />
           </button>
         </nav>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
+        {/* Right CTA Actions */}
+        <div className="flex items-center gap-3">
           
-          {/* Quick WhatsApp Header CTA */}
-          <div className="hidden md:block">
-            <WhatsAppButton
-              onClick={handleQuickWhatsAppChat}
-              label="WhatsApp Booking"
-              size="sm"
-              variant="primary"
-              title="Chat with Concierge & Book via WhatsApp"
-            />
-          </div>
-
           {/* Wishlist Button */}
           <button
             onClick={onOpenWishlist}
-            className="relative p-2.5 rounded-full bg-white border border-[#2B231F]/10 hover:border-[#D4A373] text-[#2B231F] transition-all shadow-sm group"
+            className="relative p-2.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white transition-all shadow-md cursor-pointer group"
             title="Saved Wishlist"
-            aria-label="Wishlist"
           >
-            <Heart className={`w-5 h-5 ${wishlistCount > 0 ? 'fill-[#D4A373] text-[#D4A373]' : 'text-[#2B231F] group-hover:text-[#D4A373]'}`} />
+            <Heart className={`w-5 h-5 ${wishlistCount > 0 ? 'fill-[#D4A373] text-[#D4A373]' : 'text-white group-hover:text-[#D4A373]'}`} />
             {wishlistCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-[#1E1E1E] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#F9F8F6]">
+              <span className="absolute -top-1 -right-1 bg-[#D4A373] text-[#1E1E1E] text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#090807]">
                 {wishlistCount}
               </span>
             )}
           </button>
 
+          {/* Prominent "Book Now" CTA Button */}
+          <button
+            onClick={() => onOpenWhatsAppBooking(null)}
+            className="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5c] text-white font-extrabold text-sm shadow-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95 cursor-pointer font-heading"
+          >
+            <Calendar className="w-4 h-4" />
+            <span>Book Now</span>
+          </button>
+
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-full bg-[#1E1E1E] text-white hover:bg-black transition-colors"
+            className="lg:hidden p-2.5 rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -194,81 +119,46 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-[#2B231F]/10 px-6 py-6 space-y-4 shadow-xl animate-in slide-in-from-top duration-300">
-          
-          {/* Mobile WhatsApp Action */}
-          <WhatsAppButton
+        <div className="lg:hidden bg-[#090807]/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-4 shadow-2xl text-white">
+          <button
             onClick={() => {
               setMobileMenuOpen(false);
-              handleQuickWhatsAppChat();
+              onOpenWhatsAppBooking(null);
             }}
-            label="Book via WhatsApp (Instant)"
-            size="md"
-            variant="primary"
-            fullWidth
-          />
+            className="w-full py-3 px-4 rounded-full bg-[#25D366] text-white font-bold text-sm flex items-center justify-center gap-2"
+          >
+            <Calendar className="w-4 h-4" />
+            <span>Book Now (Instant Concierge)</span>
+          </button>
 
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search destinations..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-[#F9F8F6] border border-[#2B231F]/15 text-sm"
-            />
-            <Search className="w-4 h-4 text-[#6E6660] absolute left-3.5 top-3.5" />
-          </div>
+          <div className="flex flex-col space-y-3 pt-2">
+            {[
+              { label: 'Home', id: 'hero-section' },
+              { label: 'World Destinations', id: 'dest-india' },
+              { label: 'Interactive World Map', id: 'world-map-section' },
+              { label: 'Tour Packages', id: 'destinations-section' },
+              { label: 'Customer Reviews', id: 'real-reviews-section' },
+              { label: 'About Aeterna', id: 'our-value-section' },
+            ].map((m) => (
+              <button
+                key={m.label}
+                onClick={() => scrollToSection(m.id)}
+                className="text-left py-2 text-base font-medium text-white/90 hover:text-[#D4A373] border-b border-white/5"
+              >
+                {m.label}
+              </button>
+            ))}
 
-          <div className="grid grid-cols-2 gap-2 pt-2">
-            <button
-              onClick={() => {
-                onSelectCategory('Staycation');
-                scrollToSection('destinations-section');
-              }}
-              className="w-full py-2.5 px-4 rounded-xl text-center text-sm font-semibold bg-[#F9F8F6] border border-[#2B231F]/10 text-[#2B231F]"
-            >
-              Staycation
-            </button>
-            <button
-              onClick={() => {
-                onSelectCategory('Travel Package');
-                scrollToSection('destinations-section');
-              }}
-              className="w-full py-2.5 px-4 rounded-xl text-center text-sm font-semibold bg-[#F9F8F6] border border-[#2B231F]/10 text-[#2B231F]"
-            >
-              Travel Package
-            </button>
-          </div>
-
-          <div className="flex flex-col space-y-2 pt-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenResources();
-              }}
-              className="flex items-center gap-3 py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-[#F9F8F6]"
-            >
-              <BookOpen className="w-5 h-5 text-[#6E6660]" />
-              <span>Travel Resources & Guides</span>
-            </button>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenContact();
               }}
-              className="flex items-center gap-3 py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-[#F9F8F6]"
+              className="text-left py-2 text-base font-medium text-white/90 hover:text-[#D4A373]"
             >
-              <Mail className="w-5 h-5 text-[#6E6660]" />
-              <span>Contact Concierge</span>
-            </button>
-            <button
-              onClick={() => scrollToSection('our-value-section')}
-              className="flex items-center gap-3 py-2.5 px-3 rounded-xl text-sm font-medium hover:bg-[#F9F8F6]"
-            >
-              <Compass className="w-5 h-5 text-[#6E6660]" />
-              <span>About Aeterna</span>
+              Contact Us
             </button>
           </div>
         </div>

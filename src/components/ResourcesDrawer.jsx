@@ -40,7 +40,7 @@ export default function ResourcesDrawer({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between overflow-hidden">
-        
+
         {/* Header */}
         <div className="p-6 bg-[#1E1E1E] text-white flex items-center justify-between">
           <div className="flex items-center gap-2">

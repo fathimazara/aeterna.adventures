@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+import TravelHero from './components/TravelHero';
+import ScrollProgress from './components/ScrollProgress';
+import AnimatedAirplane from './components/AnimatedAirplane';
+import ParallaxDestinationSection from './components/ParallaxDestinationSection';
+import WorldMap from './components/WorldMap';
+import BookingCTA from './components/BookingCTA';
 import SocialProofAndValue from './components/SocialProofAndValue';
+import RealReviewsSection from './components/RealReviewsSection';
 import DestinationDiscovery from './components/DestinationDiscovery';
 import DetailModal from './components/DetailModal';
 import BookingModal from './components/BookingModal';
@@ -11,12 +17,13 @@ import ResourcesDrawer from './components/ResourcesDrawer';
 import ContactModal from './components/ContactModal';
 import WishlistDrawer from './components/WishlistDrawer';
 import Footer from './components/Footer';
-import { TRIPS } from './data/tripsData';
+import { TRIPS, WORLD_DESTINATIONS } from './data/tripsData';
 
 export default function App() {
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('All');
   const [wishlist, setWishlist] = useState(['vattavada-kerala', 'munnar-kerala']);
-  
+  const [activeDestinationId, setActiveDestinationId] = useState('india');
+
   // Modals state
   const [detailTrip, setDetailTrip] = useState(null);
   const [bookingTrip, setBookingTrip] = useState(null);
@@ -34,6 +41,24 @@ export default function App() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
+  // Track active destination on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      WORLD_DESTINATIONS.forEach((dest) => {
+        const el = document.getElementById(`dest-${dest.id}`);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.4 && rect.bottom >= window.innerHeight * 0.2) {
+            setActiveDestinationId(dest.id);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleSelectTrip = (tripIdOrObj) => {
     if (typeof tripIdOrObj === 'string') {
       const found = TRIPS.find((t) => t.id === tripIdOrObj);
@@ -45,7 +70,6 @@ export default function App() {
 
   // Open WhatsApp booking modal
   const handleOpenWhatsAppBooking = (trip, initialData = {}) => {
-    // If no trip is provided (e.g. from general navbar click), pick first trip as default
     const targetTrip = trip || TRIPS[0];
     setWhatsAppTrip(targetTrip);
     setWhatsAppInitialData(initialData);
@@ -65,9 +89,15 @@ export default function App() {
     setWishlist(wishlist.filter((id) => id !== tripId));
   };
 
+  const scrollToDestinations = () => {
+    const el = document.getElementById('dest-india');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9F8F6] text-[#2B231F] font-sans relative">
+    <div className="min-h-screen flex flex-col bg-[#090807] text-[#2B231F] font-sans relative">
       
+
       {/* Toast Notification Popup */}
       {toastMessage && (
         <div className="fixed bottom-6 left-6 z-50 bg-[#1E1E1E] text-white px-5 py-3 rounded-full shadow-2xl text-xs sm:text-sm font-bold border border-[#D4A373]/40 flex items-center gap-2 animate-in slide-in-from-bottom duration-300">
@@ -76,7 +106,7 @@ export default function App() {
         </div>
       )}
 
-      {/* 1. Navigation Header & Branding */}
+      {/* 3. Sticky Glassmorphism Header */}
       <Navbar
         activeCategory={selectedCategoryFilter}
         onSelectCategory={(cat) => setSelectedCategoryFilter(cat)}
@@ -89,18 +119,49 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main className="flex-1">
-        {/* 2. Hero Section */}
-        <Hero onSelectTrip={handleSelectTrip} />
 
-        {/* 3. Social Proof & Brand Statement Section + Asymmetric Value Gallery */}
-        <SocialProofAndValue
-          onBookSeatClick={() => {
-            const destSec = document.getElementById('destinations-section');
-            if (destSec) destSec.scrollIntoView({ behavior: 'smooth' });
+        {/* 4. Cinematic Travel Hero */}
+        <TravelHero
+          onExploreClick={scrollToDestinations}
+          onBookClick={() => handleOpenWhatsAppBooking(null)}
+        />
+
+        {/* 5. 3D Parallax World Journey Destination Sections */}
+        {WORLD_DESTINATIONS.map((dest) => (
+          <ParallaxDestinationSection
+            key={dest.id}
+            destination={dest}
+            onSelectPackage={(pkg) => {
+              // Match package to full trip details or open modal
+              const match = TRIPS.find((t) => t.id === pkg.id) || TRIPS[0];
+              setDetailTrip(match);
+            }}
+            onBookNow={(destObj) => {
+              handleOpenWhatsAppBooking(null, { destination: destObj.name });
+            }}
+          />
+        ))}
+
+        {/* 6. Interactive World Map Visualizer */}
+        <WorldMap
+          onSelectDestination={(dest) => {
+            const el = document.getElementById(`dest-${dest.id}`);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
         />
 
-        {/* 4. Destination Discovery & Package Cards Section */}
+        {/* 7. Social Proof & Brand Values */}
+        <SocialProofAndValue
+          onBookSeatClick={scrollToDestinations}
+        />
+
+        {/* 8. Customer Reviews & Write Review System */}
+        <RealReviewsSection
+          onOpenWhatsAppBooking={(trip) => handleOpenWhatsAppBooking(trip)}
+          onOpenContact={() => setIsContactOpen(true)}
+        />
+
+        {/* 9. All Package Cards Grid */}
         <DestinationDiscovery
           selectedCategoryFilter={selectedCategoryFilter}
           setSelectedCategoryFilter={setSelectedCategoryFilter}
@@ -109,9 +170,16 @@ export default function App() {
           onSelectTrip={(trip) => setDetailTrip(trip)}
           onBookWhatsApp={(trip) => handleOpenWhatsAppBooking(trip)}
         />
+
+        {/* 10. Booking CTA (Where Will You Go Next?) */}
+        <BookingCTA
+          onStartPlanning={() => handleOpenWhatsAppBooking(null)}
+          onOpenContact={() => setIsContactOpen(true)}
+        />
+
       </main>
 
-      {/* 5. Footer */}
+      {/* 11. Footer */}
       <Footer
         onSelectCategory={(cat) => setSelectedCategoryFilter(cat)}
         onOpenResources={() => setIsResourcesOpen(true)}
@@ -119,7 +187,7 @@ export default function App() {
         onOpenWhatsAppBooking={() => handleOpenWhatsAppBooking(null)}
       />
 
-      {/* Floating 1-Tap WhatsApp Concierge Widget */}
+      {/* Floating Concierge Widget */}
       <FloatingWhatsApp
         onOpenWhatsAppBooking={(trip) => handleOpenWhatsAppBooking(trip)}
         onOpenContact={() => setIsContactOpen(true)}
